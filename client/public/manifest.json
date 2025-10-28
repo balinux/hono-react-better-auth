@@ -1,6 +1,6 @@
 {
-  "short_name": "TanStack App",
-  "name": "Create TanStack App Sample",
+  "short_name": "Hono todo app",
+  "name": "Hono todo app",
   "icons": [
     {
       "src": "favicon.ico",

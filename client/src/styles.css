@@ -1,4 +1,7 @@
 @import "tailwindcss";
+@plugin "daisyui" {
+  theme: dim --default;
+};
 
 body {
   @apply m-0;
