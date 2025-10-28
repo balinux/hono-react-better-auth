@@ -1,10 +1,17 @@
 import { Hono } from 'hono'
+import { getTodos } from './db/queries'
 
 const app = new Hono()
 
-const router = app.get('/', (c) => {
-  return c.text('Hello Hono!')
-})
+const router = app
+  .get('/api/todos', async(c) => {
+    try {
+      const todos = await getTodos()
+      return c.json(todos)
+    } catch (error) {
+      return c.json({ error: "Failed to fetch todos" }, 500)
+    }
+  })
   .get('/api/users', (c) => {
     return c.json([
       { id: 1, name: 'Alice' },
