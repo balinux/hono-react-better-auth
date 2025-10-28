@@ -24,3 +24,13 @@ DATABASE_URL=postgresql://user:password@localhost:5432/todos
 ## references
 - [drizzle for postgresql](https://orm.drizzle.team/docs/get-started/postgresql-new)
 
+## setup drizzle seed
+```sh
+bun add -D drizzle-seed
+```
+
+## references for db seed
+- [drizzle seed](https://orm.drizzle.team/docs/seed-overview#installation)
+
+
+
