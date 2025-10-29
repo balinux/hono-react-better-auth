@@ -32,5 +32,6 @@ bun add -D drizzle-seed
 ## references for db seed
 - [drizzle seed](https://orm.drizzle.team/docs/seed-overview#installation)
 
-
-
+# auth with better auth
+## references
+- [better auth](https://www.better-auth.com/docs/installation)
