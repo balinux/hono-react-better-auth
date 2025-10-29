@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { createFileRoute, useRouter } from '@tanstack/react-router'
+import { Link, createFileRoute, useRouter } from '@tanstack/react-router'
 import { CircleX, Key, Mail, User } from 'lucide-react'
 import { authClient } from '../../../lib/auth-client'
 
@@ -170,6 +170,16 @@ function RouteComponent() {
                   'Sign Up'
                 )}
               </button>
+            </div>
+
+            {/* already have an account */}
+            <div className='mt-6 text-center'>
+              <p className='text-base-content/70'>
+                Already have an account?
+                <Link to='/auth/sign-in' className='link link-primary ml-1'>
+                  Sign In
+                </Link>
+              </p>
             </div>
           </form>
         </div>
