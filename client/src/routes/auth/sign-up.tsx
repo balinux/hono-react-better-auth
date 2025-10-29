@@ -11,11 +11,21 @@ function RouteComponent() {
 
   const router = useRouter()
 
+  // session handler
+  const { data: session } = authClient.useSession()
+
   const [fullName, setFullName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [error, setError] = useState('')
+
+  // navigate if session exists
+  if (session) {
+    router.navigate({
+      to: '/todos'
+    })
+  }
 
 
   const handleSubmit = (e: React.FormEvent) => {
