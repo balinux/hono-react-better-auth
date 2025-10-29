@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as TodosRouteImport } from './routes/todos'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DemoTanstackQueryRouteImport } from './routes/demo/tanstack-query'
+import { Route as AuthSignUpRouteImport } from './routes/auth/sign-up'
 
 const TodosRoute = TodosRouteImport.update({
   id: '/todos',
@@ -28,34 +29,43 @@ const DemoTanstackQueryRoute = DemoTanstackQueryRouteImport.update({
   path: '/demo/tanstack-query',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthSignUpRoute = AuthSignUpRouteImport.update({
+  id: '/auth/sign-up',
+  path: '/auth/sign-up',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/todos': typeof TodosRoute
+  '/auth/sign-up': typeof AuthSignUpRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/todos': typeof TodosRoute
+  '/auth/sign-up': typeof AuthSignUpRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/todos': typeof TodosRoute
+  '/auth/sign-up': typeof AuthSignUpRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/todos' | '/demo/tanstack-query'
+  fullPaths: '/' | '/todos' | '/auth/sign-up' | '/demo/tanstack-query'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/todos' | '/demo/tanstack-query'
-  id: '__root__' | '/' | '/todos' | '/demo/tanstack-query'
+  to: '/' | '/todos' | '/auth/sign-up' | '/demo/tanstack-query'
+  id: '__root__' | '/' | '/todos' | '/auth/sign-up' | '/demo/tanstack-query'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   TodosRoute: typeof TodosRoute
+  AuthSignUpRoute: typeof AuthSignUpRoute
   DemoTanstackQueryRoute: typeof DemoTanstackQueryRoute
 }
 
@@ -82,12 +92,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DemoTanstackQueryRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth/sign-up': {
+      id: '/auth/sign-up'
+      path: '/auth/sign-up'
+      fullPath: '/auth/sign-up'
+      preLoaderRoute: typeof AuthSignUpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   TodosRoute: TodosRoute,
+  AuthSignUpRoute: AuthSignUpRoute,
   DemoTanstackQueryRoute: DemoTanstackQueryRoute,
 }
 export const routeTree = rootRouteImport
