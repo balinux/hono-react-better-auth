@@ -19,6 +19,7 @@ function RouteComponent() {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
 
   // navigate if session exists
   if (session) {
@@ -30,12 +31,14 @@ function RouteComponent() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    setError('')
 
     if (password !== confirmPassword) {
       setError('Passwords do not match')
       return
     }
+
+    setError('')
+    setLoading(true)
 
     try {
       authClient.signUp.email({
@@ -49,6 +52,8 @@ function RouteComponent() {
     } catch (err) {
       setError('An unexpected error occurred')
       console.error(err)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -81,6 +86,7 @@ function RouteComponent() {
                   title="Only letters or dash"
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
+                  disabled={loading}
                 />
               </label>
               <p className="validator-hint hidden">
@@ -97,7 +103,9 @@ function RouteComponent() {
                   placeholder="mail@site.com"
                   required
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)} />
+                  onChange={(e) => setEmail(e.target.value)}
+                  disabled={loading}
+                />
               </label>
               <div className="validator-hint hidden">Enter valid email address</div>
             </div>
@@ -116,6 +124,7 @@ function RouteComponent() {
                   title="Must be more than 8 characters, including number, lowercase letter, uppercase letter"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  disabled={loading}
                 />
               </label>
               <p className="validator-hint hidden">
@@ -137,6 +146,7 @@ function RouteComponent() {
                   title="Must be more than 8 characters, including number, lowercase letter, uppercase letter"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
+                  disabled={loading}
                 />
               </label>
               <p className="validator-hint hidden">
@@ -146,7 +156,20 @@ function RouteComponent() {
             </div>
 
             <div className="card-actions justify-start mt-5">
-              <button type="submit" className="btn btn-primary w-full">Sign Up</button>
+              <button
+                type="submit"
+                className="btn btn-primary w-full"
+                disabled={loading}
+              >
+                {loading ? (
+                  <>
+                    <span className="loading loading-spinner loading-sm text-primary"></span>
+                    <span className='ml-2'>Signing up...</span>
+                  </>
+                ) : (
+                  'Sign Up'
+                )}
+              </button>
             </div>
           </form>
         </div>
