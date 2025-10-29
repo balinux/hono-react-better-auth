@@ -35,3 +35,29 @@ bun add -D drizzle-seed
 # auth with better auth
 ## references
 - [better auth](https://www.better-auth.com/docs/installation)
+
+## setup better auth
+```sh
+bun add better-auth
+```
+## generate better auth
+```sh
+bunx @better-auth/cli generate --config ./server/lib/auth.ts
+```
+
+## copy auth schema
+copy auth schema to general chema
+
+## run db generation
+```sh
+bun run db:generate
+```
+## run db migration
+```sh
+bun run db:migrate
+```
+## run db studio
+```sh
+bun run db:studio
+``` 
+
