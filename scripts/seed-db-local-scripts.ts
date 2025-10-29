@@ -7,6 +7,13 @@ const seedDB = async () => {
     await db.delete(schema.todosTable);
 
     await seed(db, schema).refine((funcs) => ({
+        user: {
+            columns:{},
+            count: 10,
+            with:{
+                todosTable: 10
+            }
+        },
         todosTable: {
             columns: {
                 title: funcs.valuesFromArray({

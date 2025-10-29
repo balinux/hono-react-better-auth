@@ -87,25 +87,38 @@ export default function Header() {
             <span className="font-medium">TanStack Query</span>
           </Link>
 
-          <Link
-            to="/todos"
-            onClick={() => setIsOpen(false)}
-            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
-            activeProps={{
-              className:
-                'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
-            }}
-          >
-            <Network size={20} />
-            <span className="font-medium">Todos</span>
-          </Link>
+          {/* Todos */}
+          {session && (
+            <Link
+              disabled={!session}
+              to="/todos"
+              onClick={() => setIsOpen(false)}
+              className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
+              activeProps={{
+                className:
+                  'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
+              }}
+            >
+              <Network size={20} />
+              <span className="font-medium">Todos</span>
+            </Link>
+          )}
 
           {/* logout */}
-          {session && (
-          <button className="btn" onClick={onLogout}>
-            <LogOutIcon />
-            Logout
-          </button>
+          {session ? (
+            <button className="btn" onClick={onLogout}>
+              <LogOutIcon />
+              Logout
+            </button>
+          ) : (
+            <Link
+              to="/auth/sign-in"
+              onClick={() => setIsOpen(false)}
+              className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
+            >
+              <LogOutIcon />
+              Login
+            </Link>
           )}
 
           {/* Demo Links End */}

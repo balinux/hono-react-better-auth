@@ -1,7 +1,7 @@
 import { Hono } from 'hono'
 import { cors } from 'hono/cors'
-import { getTodos } from './db/queries'
 import { auth } from './lib/auth'
+import { todos } from './routes/todo.routes'
 
 const app = new Hono().basePath('/api')
 
@@ -13,14 +13,7 @@ app.use(cors({
 
 const router = app
   .on(["POST", "GET"], "/auth/*", (c) => auth.handler(c.req.raw))
-  .get('/todos', async(c) => {
-    try {
-      const todos = await getTodos()
-      return c.json(todos)
-    } catch (error) {
-      return c.json({ error: "Failed to fetch todos" }, 500)
-    }
-  })
+  .route('/todos', todos)
   .get('/users', (c) => {
     return c.json([
       { id: 1, name: 'Alice' },
